@@ -12,7 +12,7 @@
     <table name="tigren_customer_group_catalog_rules">
         <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" identity="true" comment="Rule Id"/>
         <column xsi:type="text" name="name" nullable="false" comment="Name"/>
-        <column xsi:type="varchar" name="customer_groups_id" length="255" nullable="false" comment="Customer Group ID"/>
+        <column xsi:type="varchar" name="customer_group_id" length="255" nullable="false" comment="Customer Group ID"/>
         <column xsi:type="varchar" name="store_id" length="255" nullable="false" comment="Store "/>
         <column xsi:type="varchar" name="product_id" length="255" nullable="false" comment="Products"/>
         <column xsi:type="decimal" name="discount_amount" scale="4" precision="12" unsigned="false" nullable="false"

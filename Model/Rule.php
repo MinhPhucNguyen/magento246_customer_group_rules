@@ -19,4 +19,18 @@ class Rule extends AbstractModel
         $this->_init('Tigren\CustomerGroupRule\Model\ResourceModel\Rule');
     }
 
+//    public function getCustomerGroupId()
+//    {
+//        return $this->getData('customer_group_id');
+//    }
+//
+//    public function getStoreId()
+//    {
+//        return $this->getData('store_id');
+//    }
+//
+//    public function getProductId()
+//    {
+//        return $this->getData('product_id');
+//    }
 }
