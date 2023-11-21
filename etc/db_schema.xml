@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!--
+  ~ @author    Tigren Solutions <info@tigren.com>
+  ~ @copyright Copyright (c) 2023 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+  ~ @license   Open Software License ("OSL") v. 3.0
+  ~
+  -->
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="tigren_customer_group_catalog_rules">
+        <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" identity="true" comment="Rule Id"/>
+        <column xsi:type="text" name="name" nullable="false" comment="Name"/>
+        <column xsi:type="varchar" name="customer_groups_id" length="255" nullable="false" comment="Customer Group ID"/>
+        <column xsi:type="varchar" name="store_id" length="255" nullable="false" comment="Store "/>
+        <column xsi:type="varchar" name="product_id" length="255" nullable="false" comment="Products"/>
+        <column xsi:type="decimal" name="discount_amount" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Discount Amount"/>
+        <column xsi:type="date" name="from_date" comment="From"/>
+        <column xsi:type="date" name="to_date" comment="To"/>
+        <column xsi:type="int" name="priority" nullable="false" comment="Priority"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Is Active"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+        </constraint>
+    </table>
+</schema>

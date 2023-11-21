@@ -1,0 +1,36 @@
+<?xml version="1.0"  ?>
+<!--
+  ~ @author    Tigren Solutions <info@tigren.com>
+  ~ @copyright Copyright (c) 2023 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+  ~ @license   Open Software License ("OSL") v. 3.0
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <!--UI component-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tigren_customergrouprule_rule_listing_data_source" xsi:type="string">
+                    Tigren\CustomerGroupRule\Model\ResourceModel\Rule\Grid\Collection
+                </item>
+                <item name="tigren_customergrouprule_rule_form_data_source" xsi:type="string">
+                    Tigren\CustomerGroupRule\Model\ResourceModel\Rule\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Tigren\CustomerGroupRule\Model\ResourceModel\Rule\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tigren_customer_group_catalog_rules</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Tigren\CustomerGroupRule\Model\ResourceModel\Rule
+            </argument>
+        </arguments>
+    </virtualType>
+    
+</config>
