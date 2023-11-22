@@ -6,7 +6,6 @@
  *
  */
 
-
 namespace Tigren\CustomerGroupRule\Controller\Adminhtml\Rule;
 
 use Laminas\ReCaptcha\Exception;
@@ -43,34 +42,20 @@ class Save extends Action
 
         $ruleId = $this->getRequest()->getParam('rule_id');
 
+        $model = $this->ruleFactory->create();
+
+        print_r($model);
+        exit();
+
         try {
             if ($data) {
-                $model = $this->ruleFactory->create();
-                $model->setData('name', $data['name']);
-                $model->setData('discount_amount', $data['discount_amount']);
-                $model->setData('from_date', $data['from_date']);
-                $model->setData('to_date', $data['to_date']);
-                $model->setData('priority', $data['priority']);
-
-                if (isset($data['store_id'])) {
-                    $storeIds = serialize($data['store_id']);
-                    $model->setData('store_id', $storeIds);
+                if (isset($ruleId)) {
+                    $model->load($ruleId);
+                    $this->handleSetData($model, $data, __('Update rule successfully'
+                    ));
+                } else {
+                    $this->handleSetData($model, $data, __('Create rule successfully'));
                 }
-
-                if (isset($data['customer_group_id'])) {
-                    $customerGroupIdsString = serialize($data['customer_group_id']);
-                    $model->setData('customer_group_id', $customerGroupIdsString);
-                }
-
-                if (isset($data['data']['products'])) {
-                    $productIds = serialize($data['data']['products']);
-                    $model->setData('product_id', $productIds);
-                }
-
-                $model->save();
-
-                $this->messageManager->addSuccessMessage('Create New Rule Successfully');
-
             }
 
         } catch (Exception $e) {
@@ -78,4 +63,22 @@ class Save extends Action
         }
         return $resultPage->setPath('*/*/');
     }
+
+    private function handleSetData($model, $data, $message)
+    {
+        $model->addData([
+            'name' => $data['name'],
+            'discount_amount' => $data['discount_amount'],
+            'from_date' => $data['from_date'],
+            'to_date' => $data['to_date'],
+            'priority' => $data['priority'],
+            'store_id' => isset($data['store_id']) ? implode(',', $data['store_id']) : '',
+            'customer_group_id' => isset($data['customer_group_id']) ? implode(',', $data['customer_group_id']) : '',
+            'product_id' => isset($data['data']['products']) ? implode(',', $data['data']['products']) : '',
+        ])->save();
+
+        $this->messageManager->addSuccessMessage($message);
+    }
 }
+
+

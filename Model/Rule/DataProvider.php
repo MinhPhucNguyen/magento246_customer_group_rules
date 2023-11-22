@@ -33,6 +33,7 @@ class DataProvider extends AbstractDataProvider
         if (isset($this->loadedData)) {
             return $this->loadedData;
         }
+
         $items = $this->collection->getItems();
 
         $this->loadedData = [];

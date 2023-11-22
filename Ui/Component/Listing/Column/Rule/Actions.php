@@ -49,9 +49,6 @@ class Actions extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
-//                print_r($item);
-//                exit();
-
                 if (isset($item['rule_id'])) {
                     $name = $this->getData('name');
 
