@@ -44,9 +44,6 @@ class Save extends Action
 
         $model = $this->ruleFactory->create();
 
-        print_r($model);
-        exit();
-
         try {
             if ($data) {
                 if (isset($ruleId)) {

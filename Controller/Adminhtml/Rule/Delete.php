@@ -43,15 +43,12 @@ class Delete extends Action implements HttpPostActionInterface
 
         $model = $this->ruleFactory->create();
 
-        print_r($ruleId);
-        print_r($model->getData());
-        exit();
-
-//        try {
-//
-//        } catch (Throwable $exception) {
-//            $this->messageManager->addErrorMessage($exception->getMessage());
-//        }
+        try {
+            $model->load($ruleId)->delete();
+            $this->messageManager->addSuccessMessage(__('Delete rule successfully'));
+        } catch (Throwable $exception) {
+            $this->messageManager->addErrorMessage($exception->getMessage());
+        }
 
         return $resultPage->setPath('*/*/');
     }
