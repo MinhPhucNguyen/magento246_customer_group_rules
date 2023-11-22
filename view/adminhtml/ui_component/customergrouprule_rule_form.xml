@@ -204,38 +204,38 @@
             </argument>
         </field>
 
-        <field name="product_id" component="Magento_Ui/js/form/element/ui-select" sortOrder="10" formElement="select">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filterOptions" xsi:type="boolean">true</item>
-                    <item name="multiple" xsi:type="boolean">true</item>
-                    <item name="showCheckbox" xsi:type="boolean">true</item>
-                    <item name="disableLabel" xsi:type="boolean">true</item>
-                    <item name="levelsVisibility" xsi:type="number">1</item>
-                    <item name="searchOptions" xsi:type="boolean">true</item>
-                    <item name="searchUrl" xsi:type="url" path="catalog/product/search"/>
-                    <item name="filterPlaceholder" xsi:type="string" translate="true">Product Name or SKU</item>
-                    <item name="emptyOptionsHtml" xsi:type="string" translate="true">Start typing to find products
-                    </item>
-                    <item name="missingValuePlaceholder" xsi:type="string" translate="true">Product with ID: %s doesn\'t
-                        exist
-                    </item>
-                </item>
-            </argument>
-            <settings>
-                <required>false</required>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
-                </validation>
-                <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
-                <label translate="true">Products</label>
-                <dataScope>data.products</dataScope>
-                <componentType>field</componentType>
-                <listens>
-                    <link name="${ $.namespace }.${ $.namespace }:responseData">setParsed</link>
-                </listens>
-            </settings>
-        </field>
+        <!--        <field name="product_id" component="Magento_Ui/js/form/element/ui-select" sortOrder="10" formElement="select">-->
+        <!--            <argument name="data" xsi:type="array">-->
+        <!--                <item name="config" xsi:type="array">-->
+        <!--                    <item name="filterOptions" xsi:type="boolean">true</item>-->
+        <!--                    <item name="multiple" xsi:type="boolean">true</item>-->
+        <!--                    <item name="showCheckbox" xsi:type="boolean">true</item>-->
+        <!--                    <item name="disableLabel" xsi:type="boolean">true</item>-->
+        <!--                    <item name="levelsVisibility" xsi:type="number">1</item>-->
+        <!--                    <item name="searchOptions" xsi:type="boolean">true</item>-->
+        <!--                    <item name="searchUrl" xsi:type="url" path="catalog/product/search"/>-->
+        <!--                    <item name="filterPlaceholder" xsi:type="string" translate="true">Product Name or SKU</item>-->
+        <!--                    <item name="emptyOptionsHtml" xsi:type="string" translate="true">Start typing to find products-->
+        <!--                    </item>-->
+        <!--                    <item name="missingValuePlaceholder" xsi:type="string" translate="true">Product with ID: %s doesn\'t-->
+        <!--                        exist-->
+        <!--                    </item>-->
+        <!--                </item>-->
+        <!--            </argument>-->
+        <!--            <settings>-->
+        <!--                <required>false</required>-->
+        <!--                <validation>-->
+        <!--                    <rule name="required-entry" xsi:type="boolean">false</rule>-->
+        <!--                </validation>-->
+        <!--                <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>-->
+        <!--                <label translate="true">Products</label>-->
+        <!--                <dataScope>data.products</dataScope>-->
+        <!--                <componentType>field</componentType>-->
+        <!--                <listens>-->
+        <!--                    <link name="${ $.namespace }.${ $.namespace }:responseData">setParsed</link>-->
+        <!--                </listens>-->
+        <!--            </settings>-->
+        <!--        </field>-->
 
         <field name="customer_group_id" sortOrder="40" formElement="multiselect">
             <settings>
@@ -249,5 +249,27 @@
                 </multiselect>
             </formElements>
         </field>
+    </fieldset>
+    
+    <fieldset name="conditions">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">60</item>
+            </item>
+        </argument>
+        <container name="conditions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">
+                    Magento\SalesRule\Block\Adminhtml\Promo\Quote\Edit\Tab\Conditions
+                </argument>
+            </htmlContent>
+        </container>
     </fieldset>
 </form>

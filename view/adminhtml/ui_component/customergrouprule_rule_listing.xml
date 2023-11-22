@@ -144,16 +144,6 @@
         <!--            </argument>-->
         <!--        </column>-->
 
-        <!--        <column name="store_id">-->
-        <!--            <argument name="data" xsi:type="array">-->
-        <!--                <item name="config" xsi:type="array">-->
-        <!--                    <item name="filter" xsi:type="string">textRange</item>-->
-        <!--                    <item name="sorting" xsi:type="string">asc</item>-->
-        <!--                    <item name="label" xsi:type="string" translate="true">Store</item>-->
-        <!--                </item>-->
-        <!--            </argument>-->
-        <!--        </column>-->
-
         <column name="store_id" class="Tigren\CustomerGroupRule\Ui\Component\Listing\Column\Rule\StoreView">
             <settings>
                 <label translate="true">Store View</label>
@@ -162,15 +152,15 @@
             </settings>
         </column>
 
-        <column name="product_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
-                    <item name="sorting" xsi:type="string">asc</item>
-                    <item name="label" xsi:type="string" translate="true">Product</item>
-                </item>
-            </argument>
-        </column>
+        <!--        <column name="product_id">-->
+        <!--            <argument name="data" xsi:type="array">-->
+        <!--                <item name="config" xsi:type="array">-->
+        <!--                    <item name="filter" xsi:type="string">textRange</item>-->
+        <!--                    <item name="sorting" xsi:type="string">asc</item>-->
+        <!--                    <item name="label" xsi:type="string" translate="true">Product</item>-->
+        <!--                </item>-->
+        <!--            </argument>-->
+        <!--        </column>-->
 
         <column name="discount_amount">
             <argument name="data" xsi:type="array">

@@ -9,6 +9,23 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 
+    <!--     Hide price if the customer not logged in -->
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="tigren_customergrouprule_hide_price_list"
+                type="Tigren\CustomerGroupRule\Plugin\HidePricesPlugin"
+                sortOrder="1"/>
+    </type>
+
+    <!--     Hide Add to Cart button-->
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="hidecartbutton" type="Tigren\CustomerGroupRule\Plugin\HideAddToCartBtnPlugin" sortOrder="1"/>
+    </type>
+
+    <preference for="Magento\Catalog\Pricing\Render\FinalPriceBox"
+                type="Tigren\CustomerGroupRule\Pricing\Render\FinalPriceBox"/>
+    <preference for="Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox"
+                type="Tigren\CustomerGroupRule\Pricing\Render\FinalPriceBox"/>
+
     <!--UI component-->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
@@ -32,5 +49,4 @@
             </argument>
         </arguments>
     </virtualType>
-    
 </config>
