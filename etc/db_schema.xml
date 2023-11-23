@@ -16,7 +16,7 @@
         <column xsi:type="varchar" name="store_id" length="255" nullable="false" comment="Store "/>
         <column xsi:type="varchar" name="product_conditions_serialized" length="255" nullable="false"
                 comment="Products Conditions"/>
-        <column xsi:type="decimal" name="discount_amount" scale="4" precision="12" unsigned="false" nullable="false"
+        <column xsi:type="decimal" name="discount_amount" scale="3" precision="12" unsigned="false" nullable="false"
                 default="0" comment="Discount Amount"/>
         <column xsi:type="date" name="from_date" comment="From"/>
         <column xsi:type="date" name="to_date" comment="To"/>

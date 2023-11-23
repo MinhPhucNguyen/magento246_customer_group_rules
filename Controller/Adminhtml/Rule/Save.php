@@ -69,6 +69,7 @@ class Save extends Action
             'from_date' => $data['from_date'],
             'to_date' => $data['to_date'],
             'priority' => $data['priority'],
+            'is_active' => $data['is_active'],
             'store_id' => isset($data['store_id']) ? implode(',', $data['store_id']) : '',
             'customer_group_id' => isset($data['customer_group_id']) ? implode(',', $data['customer_group_id']) : '',
             'product_id' => isset($data['data']['products']) ? implode(',', $data['data']['products']) : '',

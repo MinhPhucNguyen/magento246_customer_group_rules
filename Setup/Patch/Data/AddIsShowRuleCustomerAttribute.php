@@ -88,7 +88,7 @@ class AddIsShowRuleCustomerAttribute implements DataPatchInterface, PatchReverta
             ]
         );
 
-        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'is_show');
+        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'is_show_rule');
         $attribute->addData([
             'used_in_forms' => [
                 'adminhtml_customer',

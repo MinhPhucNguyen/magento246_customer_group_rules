@@ -28,12 +28,12 @@ class HidePricesPlugin
 
     public function afterGetProductPrice(ListProduct $subject, $result)
     {
-        return $result;
-        
+
         if (!$this->customerSession->isLoggedIn()) {
             $loginUrl = $this->urlBuilder->getUrl('customer/account/login');
             return '<a href="' . $loginUrl . '">Login to see the price</a>';
         }
+        return $result;
     }
 }
 

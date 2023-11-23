@@ -22,13 +22,12 @@ class HideAddToCartBtnPlugin
         $this->customerSession = $customerSession;
     }
 
-    public function beforeIsSaleable(Product $subject)
+    public function afterIsSaleable(Product $subject)
     {
-        if ($this->customerSession->isLoggedIn()) {
-            return true;
-        } else {
-            return false;
+        if (!$this->customerSession->isLoggedIn()) {
+            return [];
         }
+        return $subject;
     }
 }
 

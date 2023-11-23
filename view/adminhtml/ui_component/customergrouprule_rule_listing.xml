@@ -209,7 +209,7 @@
                     <editorType>select</editorType>
                 </editor>
                 <dataType>select</dataType>
-                <label translate="true">Status</label>
+                <label translate="true">Is Active</label>
             </settings>
         </column>
 
