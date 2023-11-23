@@ -9,9 +9,7 @@
 namespace Tigren\CustomerGroupRule\Plugin;
 
 use Magento\Catalog\Block\Product\ListProduct;
-use Magento\Catalog\Model\Product;
 use Magento\Customer\Model\Session as CustomerSession;
-use Magento\Framework\Pricing\Render\PriceBoxRenderInterface;
 use Magento\Framework\UrlInterface;
 
 class HidePricesPlugin
@@ -30,12 +28,12 @@ class HidePricesPlugin
 
     public function afterGetProductPrice(ListProduct $subject, $result)
     {
+        return $result;
+        
         if (!$this->customerSession->isLoggedIn()) {
             $loginUrl = $this->urlBuilder->getUrl('customer/account/login');
-            return '<a href="' . $loginUrl . '">Login to see price</a>';
+            return '<a href="' . $loginUrl . '">Login to see the price</a>';
         }
-        return $result;
     }
-
 }
 

@@ -18,6 +18,7 @@ use Magento\Framework\View\Element\Template\Context;
 
 class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
 {
+
     public function __construct(
         Context                         $context,
         SaleableInterface               $saleableItem,
@@ -25,7 +26,7 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
         RendererPool                    $rendererPool,
         array                           $data = [],
         SalableResolverInterface        $salableResolver = null,
-        MinimalPriceCalculatorInterface $minimalPriceCalculator = null
+        MinimalPriceCalculatorInterface $minimalPriceCalculator = null,
     )
     {
         parent::__construct($context,
@@ -49,7 +50,7 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
                 'data-product-id="' . $this->getSaleableItem()->getId() . '"' .
                 '>' . $html . '</div>';
         } else {
-            $wording = 'Please Login To See Price';
+            $wording = 'Please <a href="customer/account/login">Login</a> to see the price';
             return '<div class="" ' .
                 'data-role="price-box" ' .
                 'data-product-id="' . $this->getSaleableItem()->getId() . '"' .
