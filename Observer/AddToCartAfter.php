@@ -49,33 +49,37 @@ class AddToCartAfter implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
+        if (!$this->customerSession->isLoggedIn()) {
+            return;
+        }
+
         $quoteItem = $observer->getEvent()->getData('quote_item');
         $product = $observer->getEvent()->getData('product');
 
-        if ($this->customerSession->isLoggedIn()) {
+        $specialDiscount = $product->getSpecialDiscount();
 
-            $specialDiscount = $product->getSpecialDiscount();
+        $customerGroupId = $this->customerSession->getCustomerGroupId();
+        $ruleCollection = $this->ruleCollectionFactory->create();
 
-            $customerGroupId = $this->customerSession->getCustomerGroupId();
-            $ruleCollection = $this->ruleCollectionFactory->create();
-            $ruleCollection->addFieldToFilter('is_active', 1)->addFieldToFilter('customer_group_id', $customerGroupId)->setPageSize(1)->load();
-            $rule = $ruleCollection->getFirstItem();
+        $ruleCollection->addFieldToFilter('is_active', 1)
+            ->addFieldToFilter('product_id', ['like' => '%' . $product->getId() . '%'])
+            ->addFieldToFilter('customer_group_id', ['like' => '%' . $customerGroupId . '%'])
+            ->setPageSize(1)
+            ->setOrder('priority', 'DESC')
+            ->load();
 
-            $discountAmount = $rule->getDiscountAmount();
+        $rule = $ruleCollection->getFirstItem();
 
-            //Check if product has special discount then apply it
-            if ($specialDiscount && $specialDiscount > 0) {
-                $priceWithSpecialDiscount = $product->getFinalPrice() - ($product->getFinalPrice() * ($specialDiscount / 100));
-                $quoteItem->setCustomPrice($priceWithSpecialDiscount);
-                $quoteItem->setOriginalCustomPrice($priceWithSpecialDiscount);
-                $quoteItem->getProduct()->setIsSuperMode(true);
-            } else {
-                //If product has not special discount then apply discount amount
-                $quoteItem->setCustomPrice($product->getFinalPrice() - $discountAmount);
-                $quoteItem->setOriginalCustomPrice($product->getFinalPrice() - $discountAmount);
-                $quoteItem->getProduct()->setIsSuperMode(true);
-            }
+        $discountAmount = $rule->getDiscountAmount();
 
+        //Check if product has special discount then apply it
+        if ($specialDiscount && $specialDiscount > 0) {
+            $priceWithSpecialDiscount = $product->getFinalPrice() - ($product->getFinalPrice() * ($specialDiscount / 100));
+            $quoteItem->setCustomPrice($priceWithSpecialDiscount);
+            $quoteItem->setOriginalCustomPrice($priceWithSpecialDiscount);
+            $quoteItem->getProduct()->setIsSuperMode(true);
+        } else {
+            //If product has not special discount then apply discount amount
             //If customer has a rule then apply it
             if ($rule->getId()) {
                 $quoteItem->setCustomPrice($product->getFinalPrice() - $discountAmount);
