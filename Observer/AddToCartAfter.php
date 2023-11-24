@@ -49,31 +49,43 @@ class AddToCartAfter implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-
         $quoteItem = $observer->getEvent()->getData('quote_item');
         $product = $observer->getEvent()->getData('product');
 
         if ($this->customerSession->isLoggedIn()) {
 
-            $customerGroupId = $this->customerSession->getCustomerGroupId();
-
             $specialDiscount = $product->getSpecialDiscount();
+
+            $customerGroupId = $this->customerSession->getCustomerGroupId();
+            $ruleCollection = $this->ruleCollectionFactory->create();
+            $ruleCollection->addFieldToFilter('is_active', 1)->addFieldToFilter('customer_group_id', $customerGroupId)->setPageSize(1)->load();
+            $rule = $ruleCollection->getFirstItem();
+
+            $discountAmount = $rule->getDiscountAmount();
+
+            //Check if product has special discount then apply it
             if ($specialDiscount && $specialDiscount > 0) {
                 $priceWithSpecialDiscount = $product->getFinalPrice() - ($product->getFinalPrice() * ($specialDiscount / 100));
                 $quoteItem->setCustomPrice($priceWithSpecialDiscount);
                 $quoteItem->setOriginalCustomPrice($priceWithSpecialDiscount);
                 $quoteItem->getProduct()->setIsSuperMode(true);
             } else {
-                $ruleCollection = $this->ruleCollectionFactory->create();
-                $ruleCollection->addFieldToFilter('is_active', 1)->addFieldToFilter('customer_group_id', $customerGroupId)->setPageSize(1)->load();
-                $rule = $ruleCollection->getFirstItem();
+                //If product has not special discount then apply discount amount
+                $quoteItem->setCustomPrice($product->getFinalPrice() - $discountAmount);
+                $quoteItem->setOriginalCustomPrice($product->getFinalPrice() - $discountAmount);
+                $quoteItem->getProduct()->setIsSuperMode(true);
+            }
 
-                if ($rule->getId()) {
-                    $discountAmount = $rule->getDiscountAmount();
-                    $quoteItem->setCustomPrice($product->getFinalPrice() - $discountAmount);
-                    $quoteItem->setOriginalCustomPrice($product->getFinalPrice() - $discountAmount);
-                    $quoteItem->getProduct()->setIsSuperMode(true);
-                }
+            //If customer has a rule then apply it
+            if ($rule->getId()) {
+                $quoteItem->setCustomPrice($product->getFinalPrice() - $discountAmount);
+                $quoteItem->setOriginalCustomPrice($product->getFinalPrice() - $discountAmount);
+                $quoteItem->getProduct()->setIsSuperMode(true);
+            } else {
+                //if customer not match rule then apply default price
+                $quoteItem->setCustomPrice($product->getFinalPrice());
+                $quoteItem->setOriginalCustomPrice($product->getFinalPrice());
+                $quoteItem->getProduct()->setIsSuperMode(true);
             }
         }
     }
