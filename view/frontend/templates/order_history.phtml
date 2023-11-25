@@ -1,0 +1,34 @@
+<?php
+/*
+ * @author    Tigren Solutions <info@tigren.com>
+ * @copyright Copyright (c) 2023 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+ * @license   Open Software License ("OSL") v. 3.0
+ *
+ */
+
+/**
+ * @var Tigren\CustomerGroupRule\Block\History $block ;
+ */
+
+$orders = $block->getOrderHistoryByCustomerId();
+
+?>
+
+<div class="history-table">
+    <title>Order History</title>
+    <table class="w3-table w3-bordered">
+        <th>Order Id</th>
+        <th>Order</th>
+        <th>Order at</th>
+        </th>
+        <?php foreach ($orders as $key => $order) { ?>
+            <tr>
+                <td><?= $order->getId() ?></td>
+                <td><?= $order->getOrderId() ?></td>
+                <td><?= $order->getOrderAt() ?></td>
+            </tr>
+        <?php } ?>
+
+
+    </table>
+</div>

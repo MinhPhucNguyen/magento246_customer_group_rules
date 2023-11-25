@@ -39,6 +39,8 @@
         <column xsi:type="int" name="entity_id" nullable="false" comment="Entity Id"/>
         <column xsi:type="int" name="customer_id" nullable="false" comment="Customer ID"/>
         <column xsi:type="int" name="rule_id" nullable="false" comment="Rule Id "/>
+        <column xsi:type="datetime" default="CURRENT_TIMESTAMP" name="order_at" nullable="true"
+                comment="Order at"/>
 
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="history_id"/>
