@@ -32,8 +32,16 @@
         </constraint>
     </table>
 
-    <!--    <table name="customer_entity">-->
-    <!--        <column xsi:type="tinyint" name="is_show_rule" nullable="true" comment="Is Show Rule"/>-->
-    <!--    </table>-->
+    <table name="tigren_customer_group_catalog_history">
+        <column xsi:type="int" name="history_id" identity="true" unsigned="true" nullable="false"
+                comment="Order Id"/>
+        <column xsi:type="varchar" length="50" name="order_id" nullable="false" comment="Order Id"/>
+        <column xsi:type="int" name="entity_id" nullable="false" comment="Entity Id"/>
+        <column xsi:type="int" name="customer_id" nullable="false" comment="Customer ID"/>
+        <column xsi:type="int" name="rule_id" nullable="false" comment="Rule Id "/>
 
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="history_id"/>
+        </constraint>
+    </table>
 </schema>

@@ -8,8 +8,13 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
     <event name="checkout_cart_product_add_after">
         <observer name="customPriceInCart"
                   instance="Tigren\CustomerGroupRule\Observer\AddToCartAfter"/>
+    </event>
+
+    <event name="checkout_submit_all_after">
+        <observer name="saveCustomerGroupRuleHistory" instance="Tigren\CustomerGroupRule\Observer\OrderRuleHistory"/>
     </event>
 </config>
