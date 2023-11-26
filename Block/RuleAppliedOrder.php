@@ -46,9 +46,12 @@ class RuleAppliedOrder extends Template
 
         //Get state show rule
         $showRule = $this->customerSession->getCustomer()->getShowRule();
+//
+//        print_r($showRule);
+//        exit();
 
-        if (!$showRule === 1) {
-            return;
+        if ($showRule == 0) {
+            return [];
         }
 
         $orderCollection = $this->orderCollectionFactory->create();
