@@ -6,38 +6,31 @@
  *
  */
 
+
 namespace Tigren\CustomerGroupRule\Controller\Index;
 
+use Magento\Cms\Block\Page;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
-class OrderHistory extends Action
+class RuleAppliedOrder extends Action
 {
     protected $pageFactory;
 
-    /**
-     * @param Context $context
-     * @param PageFactory $pageFactory
-     */
     public function __construct(
-        Context     $context,
-        PageFactory $pageFactory
+        PageFactory $pageFactory,
+        Context     $context
     )
     {
         $this->pageFactory = $pageFactory;
         parent::__construct($context);
     }
 
-    /**
-     * @return ResponseInterface|ResultInterface|Page
-     */
     public function execute()
     {
-        return $this->pageFactory->create();
+        $resultPage = $this->pageFactory->create();
+        return $resultPage;
     }
-}
 
+}

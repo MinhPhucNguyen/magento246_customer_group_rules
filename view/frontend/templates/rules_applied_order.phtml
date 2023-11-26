@@ -7,11 +7,9 @@
  */
 
 /**
- * @var Tigren\CustomerGroupRule\Block\History $block ;
+ * @var Tigren\CustomerGroupRule\Block\RuleAppliedOrder $block
  */
-
-$orders = $block->getOrderHistoryByCustomerId();
-
+$ruleAppliedForOrders = $block->getRulesAppliedForOrders();
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,21 +44,18 @@ $orders = $block->getOrderHistoryByCustomerId();
     </style>
 </head>
 <body>
-
-<h2><strong>Order History</strong></h2>
 <table class="history-table">
+    <th>Rule Name</th>
     <th>Order Id</th>
-    <th>Order</th>
-    <th>Order at</th>
+    <th>Created at</th>
     </th>
-    <?php foreach ($orders as $key => $order) { ?>
+    <?php foreach ($ruleAppliedForOrders as $key => $item) { ?>
         <tr>
-            <td><?= $order->getId() ?></td>
-            <td><?= $order->getOrderId() ?></td>
-            <td><?= $order->getOrderAt() ?></td>
+            <td><?= $item['rule_name'] ?></td>
+            <td><?= $item['order_id'] ?></td>
+            <td><?= $item['created_at'] ?></td>
         </tr>
     <?php } ?>
 </table>
 </body>
 </html>
-

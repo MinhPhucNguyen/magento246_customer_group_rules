@@ -11,6 +11,9 @@ namespace Tigren\CustomerGroupRule\Controller\Adminhtml\Rule;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
 use Tigren\CustomerGroupRule\Model\RuleFactory;
 use Tigren\CustomerGroupRule\Model\ResourceModel\Rule as RuleResource;
 
@@ -19,6 +22,11 @@ class Delete extends Action implements HttpPostActionInterface
 
     protected $ruleFactory;
 
+    /**
+     * @param Context $context
+     * @param RuleResource $resource
+     * @param RuleFactory $ruleFactory
+     */
     public function __construct(
         Context              $context,
         private RuleResource $resource,
@@ -29,6 +37,9 @@ class Delete extends Action implements HttpPostActionInterface
         parent::__construct($context);
     }
 
+    /**
+     * @return ResponseInterface|Redirect|ResultInterface
+     */
     public function execute()
     {
 

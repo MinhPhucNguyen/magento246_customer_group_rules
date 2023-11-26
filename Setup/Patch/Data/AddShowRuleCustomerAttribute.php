@@ -5,7 +5,6 @@
  * @license   Open Software License ("OSL") v. 3.0
  *
  */
-
 declare(strict_types=1);
 
 namespace Tigren\CustomerGroupRule\Setup\Patch\Data;
@@ -19,7 +18,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
-class AddIsShowRuleCustomerAttribute implements DataPatchInterface, PatchRevertableInterface
+class AddShowRuleCustomerAttribute implements DataPatchInterface, PatchRevertableInterface
 {
 
     /**
@@ -70,9 +69,9 @@ class AddIsShowRuleCustomerAttribute implements DataPatchInterface, PatchReverta
 
         $customerSetup->addAttribute(
             Customer::ENTITY,
-            'is_show_rule',
+            'show_rule',
             [
-                'label' => 'Is Show Rule',
+                'label' => 'show_rule',
                 'input' => 'boolean',
                 'type' => 'int',
                 'source' => '',
@@ -88,7 +87,7 @@ class AddIsShowRuleCustomerAttribute implements DataPatchInterface, PatchReverta
             ]
         );
 
-        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'is_show_rule');
+        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'show_rule');
         $attribute->addData([
             'used_in_forms' => [
                 'adminhtml_customer',
@@ -112,7 +111,7 @@ class AddIsShowRuleCustomerAttribute implements DataPatchInterface, PatchReverta
         $this->moduleDataSetup->getConnection()->startSetup();
         /** @var CustomerSetup $customerSetup */
         $customerSetup = $this->customerSetupFactory->create(['setup' => $this->moduleDataSetup]);
-        $customerSetup->removeAttribute(Customer::ENTITY, 'is_show_rule');
+        $customerSetup->removeAttribute(Customer::ENTITY, 'show_rule');
 
         $this->moduleDataSetup->getConnection()->endSetup();
     }

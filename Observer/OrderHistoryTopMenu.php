@@ -11,9 +11,17 @@ namespace Tigren\CustomerGroupRule\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Data\Tree\Node;
+use Magento\Customer\Model\Session as CustomerSession;
 
 class OrderHistoryTopMenu implements ObserverInterface
 {
+
+    protected $customerSession;
+
+    public function __construct(CustomerSession $customerSession)
+    {
+        $this->customerSession = $customerSession;
+    }
 
     public function execute(Observer $observer)
     {

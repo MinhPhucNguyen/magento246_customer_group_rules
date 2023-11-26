@@ -21,6 +21,12 @@ class Save extends Action
     protected $ruleFactory;
     protected $formKeyValidator;
 
+    /**
+     * @param Context $context
+     * @param PageFactory $pageFactory
+     * @param RuleFactory $ruleFactory
+     * @param Validator $formKeyValidator
+     */
     public function __construct(Context $context, PageFactory $pageFactory, RuleFactory $ruleFactory, Validator $formKeyValidator)
     {
         $this->pageFactory = $pageFactory;
@@ -29,6 +35,10 @@ class Save extends Action
         parent::__construct($context);
     }
 
+
+    /**
+     * @return ResponseInterface|ResultInterface|Page
+     */
     public function execute()
     {
 

@@ -1,0 +1,22 @@
+<!--
+  ~ @author    Tigren Solutions <info@tigren.com>
+  ~ @copyright Copyright (c) 2023 Tigren Solutions <https://www.tigren.com>. All rights reserved.
+  ~ @license   Open Software License ("OSL") v. 3.0
+  ~
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Rules Applied For Orders</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Tigren\CustomerGroupRule\Block\RuleAppliedOrder" name="custom_rule_content"
+                   template="Tigren_CustomerGroupRule::rules_applied_order.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

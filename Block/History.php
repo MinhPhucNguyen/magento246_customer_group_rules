@@ -8,6 +8,8 @@
 
 namespace Tigren\CustomerGroupRule\Block;
 
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Framework\View\Element\Template;
 use Tigren\CustomerGroupRule\Model\OrderHistoryFactory;
 use Magento\Framework\View\Element\Template\Context;
@@ -19,6 +21,11 @@ class History extends Template
 
     protected $customerSession;
 
+    /**
+     * @param Context $context
+     * @param OrderHistoryFactory $orderHistoryFactory
+     * @param CustomerSession $customerSession
+     */
     public function __construct(
         Context             $context,
         OrderHistoryFactory $orderHistoryFactory,
@@ -30,6 +37,9 @@ class History extends Template
         parent::__construct($context);
     }
 
+    /**
+     * @return AbstractDb|AbstractCollection|null
+     */
     public function getOrderHistoryByCustomerId()
     {
         $customerId = $this->customerSession->getCustomer()->getId();
