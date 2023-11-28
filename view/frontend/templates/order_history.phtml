@@ -13,46 +13,41 @@
 $orders = $block->getOrderHistoryByCustomerId();
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        #customers {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-        .history-table td, .history-table th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-        .history-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+    .history-table td, .history-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
 
-        .history-table tr:hover {
-            background-color: #ddd;
-        }
+    .history-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
-        .history-table th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-    </style>
-</head>
-<body>
+    .history-table tr:hover {
+        background-color: #ddd;
+    }
+
+    .history-table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
 
 <h2><strong>Order History</strong></h2>
 <table class="history-table">
     <th>Order Id</th>
     <th>Order</th>
     <th>Order at</th>
-    </th>
     <?php foreach ($orders as $key => $order) { ?>
         <tr>
             <td><?= $order->getId() ?></td>
@@ -61,6 +56,15 @@ $orders = $block->getOrderHistoryByCustomerId();
         </tr>
     <?php } ?>
 </table>
-</body>
-</html>
 
+<div data-mage-init='{"Tigren_CustomerGroupRule/js/modal-show":{}}'>
+    <button id="test_btn"><?= __("TEST BTN") ?></button>
+</div>
+
+<!--<script type="text/x-magento-init">-->
+<!--    {-->
+<!--        "#test_btn": {-->
+<!--            "Tigren_CustomerGroupRule/js/modal-show": {}-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->

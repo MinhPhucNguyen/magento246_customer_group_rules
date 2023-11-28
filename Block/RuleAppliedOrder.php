@@ -46,16 +46,12 @@ class RuleAppliedOrder extends Template
 
         //Get state show rule
         $showRule = $this->customerSession->getCustomer()->getShowRule();
-//
-//        print_r($showRule);
-//        exit();
 
         if ($showRule == 0) {
             return [];
         }
 
         $orderCollection = $this->orderCollectionFactory->create();
-        $ruleCollection = $this->ruleFactory->create()->getCollection();
 
         $historyCollection = $this->orderHistoryFactory->create()->getCollection()
             ->addFieldToFilter('customer_id', $customerId)
@@ -63,10 +59,8 @@ class RuleAppliedOrder extends Template
 
         $ordersWithRules = [];
         foreach ($historyCollection as $history) {
-//            print_r($history->getData());
-//            exit();
-
-            $ruleName = $this->ruleFactory->create()->load($history->getRuleId())->getName();
+            $ruleCollection = $this->ruleFactory->create();
+            $ruleName = $ruleCollection->load($history->getRuleId())->getName();
 
             $ordersWithRules[] = [
                 'order_id' => $history->getOrderId(),

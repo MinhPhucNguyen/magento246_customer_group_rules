@@ -10,7 +10,7 @@
     <update handle="customer_account"/>
     <body>
         <referenceBlock name="page.main.title">
-            <action method="setPageTitle">
+            <action method="setPageTitle" ifconfig="customer/startup/isLoggedIn">
                 <argument translate="true" name="title" xsi:type="string">Rules Applied For Orders</argument>
             </action>
         </referenceBlock>

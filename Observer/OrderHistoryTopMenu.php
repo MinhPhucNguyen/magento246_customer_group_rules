@@ -25,6 +25,10 @@ class OrderHistoryTopMenu implements ObserverInterface
 
     public function execute(Observer $observer)
     {
+        if (!$this->customerSession->isLoggedIn()) {
+            return $this; // If the user is not logged in, don't add the menu item
+        }
+        
         $menu = $observer->getMenu();
         $tree = $menu->getTree();
 
